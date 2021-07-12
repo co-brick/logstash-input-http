@@ -4,5 +4,3 @@ Gemfile.bak
 .bundle
 vendor
 .idea
-build/
-.gradle

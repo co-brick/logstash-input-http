@@ -1,52 +1,10 @@
-# Fork of Loki Logstash Http input Plugin
-Added features:
-- encode data which comes from promtails
+# Logstash Plugin
 
-Eg. promtail configuration:
-```yaml 
-server:
-  http_listen_port: 9080
-  grpc_listen_port: 0
-  log_level: debug
-positions:
-  filename: /tmp/positions.yaml
+[![Travis Build Status](https://travis-ci.com/logstash-plugins/logstash-input-http.svg)](https://travis-ci.com/logstash-plugins/logstash-input-http)
 
-clients:
-  - url: http://localhost:5043
-    tenant_id: chcialembycpiekarzem
+This is a plugin for [Logstash](https://github.com/elastic/logstash).
 
-scrape_configs:
-- job_name: system
-  static_configs:
-  - targets:
-      - localhost
-    labels:
-      job: varlogs
-      tenant: chcialembycpiekarzem
-      __path__: /var/log/*log
-```
-
-Eg. Logstash configuration:
-```yaml 
-input {
-    http {
-        id => "logstash-promtail-http-input"
-        port => "5043"  
-        host => "0.0.0.0"
-    }
-}
-output {
-  stdout { codec => rubydebug }
-}
-```
-
-## Building and pushing gem
-1. `gem build logstash-promtail-http-input.gemspec`
-2. Push desired build version `logstash-promtail-http-input-{VERSION}.gem`
-    - In case of massage 'Repushing of gem versions is not allowed.' Raise the plugin version in logstash-promtail-http-input.gemspec
-    - Rebuild the plugin
-    - Push proper version
-
+It is fully free and fully open source. The license is Apache 2.0, meaning you are pretty much free to use it however you want in whatever way.
 
 ## Documentation
 
@@ -116,17 +74,15 @@ You can use the same **2.1** method to run your plugin in an installed Logstash 
 
 - Build your plugin gem
 ```sh
-jruby -S gem build logstash-promtail-http-input.gemspec
-
+gem build logstash-filter-awesome.gemspec
 ```
 - Install the plugin from the Logstash home
 ```sh
 # Logstash 2.3 and higher
 bin/logstash-plugin install --no-verify
 
-# or locally 
-
-bin/logstash-plugin install --no-verify --local  /path_to_gem/logstash-filter-java_drain_filter-0.1.1.gem
+# Prior to Logstash 2.3
+bin/plugin install --no-verify
 
 ```
 - Start Logstash and proceed to test the plugin
