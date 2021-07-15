@@ -82,7 +82,6 @@ gem build logstash-filter-awesome.gemspec
 bin/logstash-plugin install --no-verify
 
 # Prior to Logstash 2.3
-bin/plugin install --no-verify
 
 ```
 - Start Logstash and proceed to test the plugin
